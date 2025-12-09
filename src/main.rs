@@ -4,14 +4,14 @@ use std::ffi::OsString;
 use std::{env, error::Error, fs::File, io::Write, thread, time::Duration};
 
 fn myLog(s: &str) {
-    let pwd = env::current_dir().unwrap();
-    if (php::is_dir(&format!("{}\\log", pwd.to_str().unwrap())) == false) {
-        php::mkdir(&format!("{}\\log", pwd.to_str().unwrap()));
+    let _pwd = php::basedir();
+    if (php::is_dir(&format!("{}\\log", _pwd)) == false) {
+        php::mkdir(&format!("{}\\log", _pwd));
     }
     let t: u64 = php::time();
     let log_file = format!(
         "{}\\log\\log_{}.txt",
-        pwd.to_str().unwrap(),
+        _pwd,
         php::date("Ymd", Some(t))
     );
     let mut data = String::new();
