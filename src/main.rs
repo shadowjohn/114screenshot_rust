@@ -134,8 +134,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         // sleep 1 second
         thread::sleep(Duration::from_secs(1));
 
-        if (php::is_file("D:\\tools\\114screenshot_rust\\restart.txt")) {
-            php::unlink("D:\\tools\\114screenshot_rust\\restart.txt");
+        let restart_file = format!("{}\\restart.txt", php::basedir());
+        if (php::is_file(&restart_file)) {
+            php::unlink(&restart_file);
             myLog("Restarting...");
             println!("Restarting...");
             php::exit();
